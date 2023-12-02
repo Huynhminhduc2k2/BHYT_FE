@@ -10,6 +10,11 @@
     border-style: none;
 }
 
+
+/*******************************/
+/* This is css for SignIn page */
+/*******************************/
+
 .SignIn{
     height: 100vh;
     width: 100vw;
@@ -29,7 +34,7 @@
 }
 
 .SignIn-Form-Title{
-    margin: 20px 0;
+    margin-bottom: 20px;
     font-size: 2.5rem;
 }
 
@@ -79,7 +84,7 @@
 }
 
 .SignIn-Form-Alternatives-Intro-Side{
-    width: 35%;
+    width: 34%;
     height: 1px;
     background-color: #000000;
     align-self: center;
@@ -117,4 +122,70 @@
 
 .SignIn-SignUp-Nav a{
     color:#000000;
+}
+
+
+/*******************************/
+/* This is css for SignUp page */
+/*******************************/
+
+.SignUp{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.SignUp-Form{
+    display: flex;
+    flex-direction: column;
+}
+
+.SignUp-Form-Title{
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.repassword-Input, .code-Input{
+    width: 350px;
+    height: 50px;
+    border-radius: 5px;
+    border: #d1d1d1 solid 2px;
+    margin: 10px 0;
+    padding: 0 10px;
+    font-size: 1rem;
+}
+
+.register-Btn, .verify-Btn{
+    width: 370px;
+    height: 50px;
+    align-self: center;
+    font-size: 1rem;
+    background-color: var(--Btn-bg-color);
+    color: var(--Btn-color);
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-style: none;
+    margin: 10px 0;
+}
+
+.SignUp-Outlines{
+    margin-top: 20px;
+    text-align: left;
+    list-style-position: inside;
+}
+
+.SignUp-Logo{
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.SignUp-Form-Outlines{
+    margin: 10px 0;
 }
