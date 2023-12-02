@@ -19,9 +19,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/home" element={<MainPage />} default />
+          <Route path="/signin" element={<SignIn />} default />
           <Route path="/signup" element={<SignUp1 />} default />
-          <Route path="/signin" element={<SignIn/>} default />
-          </Routes>
+          <Route path="/signupVerify" element={<SignUp2 />} default />
+        </Routes>
       </Router>
     </>
   );
