@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import SignIn from './view/SignIn';
 import SignUp1 from './view/SignUp/SignUp1';
 import SignUp2 from './view/SignUp/SignUp2';
@@ -7,8 +8,8 @@ import MainPage from './view/MainPage';
 function App() {
   return (
     <>
-      <MainPage />
-      {/* <SignIn /> */}
+      {/* <MainPage /> */}
+      <SignIn />
       {/* <SignUp1 /> */}
       {/* <SignUp2 /> */}
     </>
