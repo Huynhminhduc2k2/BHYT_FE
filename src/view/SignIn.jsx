@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { NavLink } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar as NavbarBs } from 'react-bootstrap';
 function SignIn() {
   return (
     <>
@@ -50,10 +51,16 @@ function SignIn() {
 
           <div>
             <p>Don't have an account ?</p>
-            <a href="/SignUp">
-              <b>Create Now</b>
-            </a>
+        
           </div>
+          <Nav>
+              <Nav.Link
+                href={'/signup'}
+                style={{ color: 'blue', textDecorationLine: 'underline' }}
+              >
+                Create Now
+              </Nav.Link>
+            </Nav>
         </div>
 
         <img src="" alt="" />
