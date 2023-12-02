@@ -3,6 +3,8 @@ import SignInLogo from '../assets/logos/HealthInsurance.png';
 import GoogleIcon from '../assets/images/google.png';
 import FacebookIcon from '../assets/images/facebook.png';
 import TwitterIcon from '../assets/images/twitter.png';
+import { NavLink } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar as NavbarBs } from 'react-bootstrap';
 
 function SignIn() {
   return (
@@ -63,13 +65,18 @@ function SignIn() {
 
           <div className='SignIn-SignUp-Nav'>
             <p>Don't have an account ?</p>
-            <a href="/SignUp">
-              <b>Create Now</b>
-            </a>
+              <Nav>
+                <Nav.Link
+                  href={'/signup'}
+                  style={{ color: 'blue', textDecorationLine: 'underline' }}
+                >
+                Create Now
+              </Nav.Link>
+            </Nav>
           </div>
         </div>
 
-        <img src={SignInLogo} alt="" className="SignIn-Logo" />
+        <img src={SignInLogo} alt="sign in logo" className="SignIn-Logo" />
       </section>
     </>
   );
