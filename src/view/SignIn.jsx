@@ -1,31 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SignInLogo from '../assets/logos/HealthInsurance.png';
 import GoogleIcon from '../assets/images/google.png';
 import FacebookIcon from '../assets/images/facebook.png';
 import TwitterIcon from '../assets/images/twitter.png';
 import { NavLink } from 'react-bootstrap';
 import { Button, Container, Nav, Navbar as NavbarBs } from 'react-bootstrap';
+import axios from 'axios';
+
+const API_URL = 'https://localhost:7067/api/Auth/';
 
 function SignIn() {
+  const [formData, setFormData] = useState({
+    email_phone: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(API_URL + 'login', formData);
+
+      if (!response) {
+        console.error('Empty response received');
+        return;
+      }
+
+      console.log('Login successful', response.data);
+      alert('Login successful');
+    } catch (error) {
+      console.error('Login failed', error.response?.data);
+
+      if (
+        error.response?.status === 400 &&
+        error.response?.data?.title ===
+          'One or more validation errors occurred.'
+      ) {
+        // Xử lý lỗi validation
+        console.error('Validation errors:', error.response.data.errors);
+      }
+
+      alert('Login failed: ' + (error.response?.data || 'Unknown error'));
+    }
+  };
+
   return (
     <>
       <section className="SignIn">
         <div className="SignIn-Form-Container">
-          <form action="/SignIn" method="post" className="SignIn-Form">
+          <form onSubmit={handleSubmit} className="SignIn-Form">
             <h1 className="SignIn-Form-Title">Login</h1>
             <p className="SignIn-Form-Intro">
               Hi, enter your details to get login to your account.
             </p>
             <input
               type="text"
-              name="email_phone"
+              name="username"
+              onChange={handleChange}
               className="email_phone-Input"
               placeholder="Enter Email / Phone Number"
             />
             <div>
               <input
-                type="text"
+                type="password"
                 name="password"
+                onChange={handleChange}
                 className="password-Input"
                 placeholder="Password"
               />
@@ -47,7 +94,7 @@ function SignIn() {
               <p> Or Login with</p>
               <hr className="SignIn-Form-Alternatives-Intro-Side" />
             </div>
-            <nav className='SignIn-Form-Alternatives-Navs'>
+            <nav className="SignIn-Form-Alternatives-Navs">
               <a href="/GoogleSignIn">
                 <img src={GoogleIcon} alt="google icon" />
                 Google
@@ -63,13 +110,13 @@ function SignIn() {
             </nav>
           </div>
 
-          <div className='SignIn-SignUp-Nav'>
+          <div className="SignIn-SignUp-Nav">
             <p>Don't have an account ?</p>
-              <Nav>
-                <Nav.Link
-                  href={'/signup'}
-                  style={{ color: 'blue', textDecorationLine: 'underline' }}
-                >
+            <Nav>
+              <Nav.Link
+                href={'/signup'}
+                style={{ color: 'blue', textDecorationLine: 'underline' }}
+              >
                 Create Now
               </Nav.Link>
             </Nav>
