@@ -1,0 +1,40 @@
+.subscription-plans {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .plan {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    width: 30%;
+  }
+  
+  .plan.selected {
+    border-color: #007bff;
+  }
+  
+  .selected-plan-details {
+    border: 1px solid #007bff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .selected-plan-details h3 {
+    color: #007bff;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
