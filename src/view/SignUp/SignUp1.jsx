@@ -1,30 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SignUpLogo from '../../assets/logos/HealthInsurance.png';
+import { NavLink } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar as NavbarBs } from 'react-bootstrap';
+import { API_URL } from '../API_Config';
+import { useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
 
 function SignUp1() {
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email_phone: '',
+    password: '',
+    re_password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(API_URL + 'registry', formData);
+
+      if (!response) {
+        console.error('Empty response received');
+        return;
+      }
+
+      console.log('Register successful', response.data);
+
+      navigate('/signupVerify');
+
+      alert('Register successful');
+    } catch (error) {
+      console.error('Register failed', error.response?.data);
+
+      if (
+        error.response?.status === 400 &&
+        error.response?.data?.title ===
+          'One or more validation errors occurred.'
+      ) {
+        // Xử lý lỗi validation
+        console.error('Validation errors:', error.response.data.errors);
+      }
+
+      alert('Register failed: ' + (error.response?.data || 'Unknown error'));
+    }
+  };
+
   return (
     <>
       <section className="SignUp">
         <div className="SignUp-Container">
-          <form action="/SignUp1" method="post" className="SignUp-Form">
+          <form onSubmit={handleSubmit} className="SignUp-Form">
             <h1 className="SignUp-Form-Title">Register</h1>
 
             <input
               type="text"
               placeholder="Enter Email / Phone Number"
               name="email_phone"
+              onChange={handleChange}
               className="email_phone-Input"
             />
             <input
               type="text"
               placeholder="Password"
               name="password"
+              onChange={handleChange}
               className="password-Input"
             />
             <input
               type="text"
               placeholder="Type password again"
-              name="re-password"
+              name="re_password"
+              onChange={handleChange}
               className="repassword-Input"
             />
 

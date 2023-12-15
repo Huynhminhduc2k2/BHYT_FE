@@ -5,11 +5,13 @@ import FacebookIcon from '../assets/images/facebook.png';
 import TwitterIcon from '../assets/images/twitter.png';
 import { NavLink } from 'react-bootstrap';
 import { Button, Container, Nav, Navbar as NavbarBs } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { API_URL } from './API_Config';
 import axios from 'axios';
 
-const API_URL = 'https://localhost:7067/api/Auth/';
-
 function SignIn() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email_phone: '',
     password: '',
@@ -35,6 +37,9 @@ function SignIn() {
       }
 
       console.log('Login successful', response.data);
+
+      navigate('/home');
+
       alert('Login successful');
     } catch (error) {
       console.error('Login failed', error.response?.data);
