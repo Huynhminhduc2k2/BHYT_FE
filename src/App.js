@@ -7,6 +7,8 @@ import MainPage from './view/MainPage';
 import { userState, useState } from 'react';
 import InsuranceRegistrationForm from './view/InsuranceRegisForm/RegisForm'
 import Subscription from './view/ChooseSubscription/Subscription';
+import Payment from './view/Payment/Payment';
+import UserProfile from './view/Profile/Profile';
 import {
   BrowserRouter as Router,
   Route,
@@ -26,6 +28,8 @@ function App() {
           <Route path="/signupVerify" element={<SignUp2 />} default />
           <Route path="/insuregis" element={<InsuranceRegistrationForm />}  />
           <Route path="/subscription" element={<Subscription />}  />
+          <Route path="/payment" element={<Payment />}  />
+          <Route path="/profile" element={<UserProfile />}  />
         </Routes>
       </Router>
     </>

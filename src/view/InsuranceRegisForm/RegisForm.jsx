@@ -1,115 +1,93 @@
 import React, { useState } from 'react';
 import "./RegisForm.css"
 
-const InsuranceRegistrationForm = () => {
-  // State to manage form inputs
+export default function InsuranceRegistrationForm () {
+  const [step, setStep] = useState("");
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
-    phoneNumber: '',
-    insuranceType: '',
+    phone: '',
+    address: '',
+    CMND:'',
+    health:'',
+    dob: '',
+   // default value
   });
 
-  // Function to handle form input changes
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { id, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [id]: value,
     });
   };
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Perform actions with the form data (e.g., send to server)
-    console.log('Form Data:', formData);
-    // Reset form fields after submission
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      insuranceType: '',
-    });
+  const handleNext = () => {
+    setStep(step + 1);
+  };
+  const handleBack = () => {
+    setStep(step - 1);
+  };
+
+
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return (
+          <div className="registration-form">
+            <h2>Step 1: Personal Information</h2>
+            <label htmlFor="name">Full Name</label>
+            <input type="text" id="name" value={formData.name} onChange={handleInputChange} placeholder="Enter your full name" />
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" value={formData.email} onChange={handleInputChange} placeholder="Enter your email" />
+            <label htmlFor="phone">Phone Number</label>
+            <input type="phone" id="phone" value={formData.phone} onChange={handleInputChange} placeholder="Enter your phone number" />
+            <label htmlFor="CMND">Phone Number</label>
+            <input type="CMND" id="CMND" value={formData.phone} onChange={handleInputChange} placeholder="Enter your CMND" />
+            
+            {/* Other fields */}
+            <button onClick={handleNext}>Next</button>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="registration-form">
+            <h2>Step 2: Your Personal Health</h2>
+            <label htmlFor="health">Health Issue</label>
+            <input type="health" id="health" value={formData.health} onChange={handleInputChange} placeholder="Enter your health issue" />
+            <label htmlFor="insurance-type">Insurance Type</label>
+            <select id="insurance-type" value={formData.insuranceType} onChange={handleInputChange}>
+              <option value="health">Health Insurance</option>
+              <option value="auto">Auto Insurance</option>
+              <option value="life">Life Insurance</option>
+            </select>
+
+            {/* Other fields */}
+            <button onClick={handleNext}>Next</button>
+            <button onClick={handleBack}>Back</button>
+          </div>
+        );
+      case 3:
+        return (
+          <div className="registration-form">
+            <h2>Step 3: Term of use</h2>
+            <label htmlFor="terms">
+              <input type="checkbox" id="agreedTerms" checked={formData.agreedTerms} onChange={handleInputChange} />
+             I agree to the <a href="/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of Use</a>.
+            </label>
+            <button onClick={handleNext}>Submit</button>
+            <button onClick={handleBack}>Back</button>
+          </div>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
-    <div className="InsuRegisForm">
-      <h2>Insurance Registration Form</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          First Name:
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Last Name:
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Phone Number:
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <br />
-        <label>
-          CMND ID:
-          <input
-            type="ID"
-            name="CMNDID"
-            value={formData.CMNDID}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Insurance Type:
-          <select
-            name="insuranceType"
-            value={formData.insuranceType}
-            onChange={handleInputChange}
-          >
-            <option value="">Select</option>
-            <option value="health">Health Insurance</option>
-            <option value="auto">Auto Insurance</option>
-            {/* Add more options as needed */}
-          </select>
-        </label>
-        <br />
-        
-        
-        <button type="submit">Submit</button>
-      </form>
+    <div className="form-container">
+      {renderStep()}
     </div>
   );
 };
 
-export default InsuranceRegistrationForm;

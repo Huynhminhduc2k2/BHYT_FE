@@ -1,0 +1,85 @@
+.user-profile {
+    display: flex;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 1800px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .user-options {
+    flex: 0 0 30%; /* Adjust the width as needed */
+    padding: 20px;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+  }
+  
+  .user-options ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .user-options li {
+    margin-bottom: 10px;
+  }
+  
+  .user-options a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 8px 0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .user-options a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .user-details {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .user-details h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .user-details label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .user-details p {
+    margin: 20px 0;
+    color: #777;
+  }
+  
+  .user-details .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    object-fit: cover;
+  }
+  
+  .user-details .button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .user-details .button:hover {
+    background-color: #388e3c;
+  }
