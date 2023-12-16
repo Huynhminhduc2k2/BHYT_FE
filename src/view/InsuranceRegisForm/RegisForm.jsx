@@ -3,6 +3,7 @@ import "./RegisForm.css"
 import  axios, { AxiosError }  from 'axios';
 import { API_URL } from '../API_Config';
 import { useToast } from '@chakra-ui/react';
+import { Button, ButtonGroup,Stack } from '@chakra-ui/react'
 
 export default function InsuranceRegistrationForm () {
   // const [step, setStep] = useState("");
@@ -122,7 +123,12 @@ export default function InsuranceRegistrationForm () {
 
 
             {/* Other fields */}
-            <button onClick={handleSubmit}>Submit</button>
+            <Stack direction='row' spacing={4}>
+
+            <Button 
+           
+            onClick={handleSubmit} >Submit</Button>
+            </Stack>
           </div>
           </div>
         );

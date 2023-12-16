@@ -58,7 +58,7 @@ function Payment() {
     
     const PaymentAndOrder = () => {
       return (
-        <div>
+        <div className='PaymentandOrder'>
           <Payment />
           <OrderRecap />
         </div>

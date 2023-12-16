@@ -23,10 +23,10 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/home" element={<MainPage />} default />
-          <Route path="/signin" element={<SignIn />} default />
-          <Route path="/signup" element={<SignUp1 />} default />
-          <Route path="/signupVerify" element={<SignUp2 />} default />
+          <Route path="/home" element={<MainPage />}  />
+          <Route path="/" element={<SignIn />} default />
+          <Route path="/signup" element={<SignUp1 />}  />
+          <Route path="/signupVerify" element={<SignUp2 />}  />
           <Route path="/insuregis" element={<InsuranceRegistrationForm />} />
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/payment" element={<Payment />} />
