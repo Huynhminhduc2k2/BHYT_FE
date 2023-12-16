@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./Subscription.css"
-
+import { Button } from '@chakra-ui/react';
 const Subscription = () => {
   return (
     <div className="pricing-plans">
@@ -12,7 +12,8 @@ const Subscription = () => {
           <li>Feature 2</li>
           <li>Feature 3</li>
         </ul>
-        <button>Subscribe</button>
+    
+        <Button colorScheme='blue'>Subscribe</Button>
       </div>
 
       <div className="plan popular">
@@ -25,7 +26,7 @@ const Subscription = () => {
           <li>Feature 3</li>
           <li>Feature 4</li>
         </ul>
-        <button>Subscribe</button>
+        <Button colorScheme='blue'>Subscribe</Button>
       </div>
 
       <div className="plan">
@@ -38,7 +39,7 @@ const Subscription = () => {
           <li>Feature 4</li>
           <li>Feature 5</li>
         </ul>
-        <button>Subscribe</button>
+        <Button colorScheme='blue'>Subscribe</Button>
       </div>
     </div>
   );
