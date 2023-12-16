@@ -23,10 +23,17 @@ function App() {
     <>
       <Router>
         <Routes>
+<<<<<<< HEAD
           <Route path="/home" element={<MainPage />} />
           <Route path="/signin" element={<SignIn />} default />
           <Route path="/signup" element={<SignUp1 />} />
           <Route path="/signupVerify" element={<SignUp2 />} />
+=======
+          <Route path="/home" element={<MainPage />}  />
+          <Route path="/" element={<SignIn />} default />
+          <Route path="/signup" element={<SignUp1 />}  />
+          <Route path="/signupVerify" element={<SignUp2 />}  />
+>>>>>>> e52413914f0208bbfec6f2c64b3a91d328925f89
           <Route path="/insuregis" element={<InsuranceRegistrationForm />} />
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/payment" element={<Payment />} />
