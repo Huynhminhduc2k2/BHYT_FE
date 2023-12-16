@@ -4,16 +4,15 @@ import { NavLink } from 'react-bootstrap';
 import { Button, Container, Nav, Navbar as NavbarBs } from 'react-bootstrap';
 import { API_URL } from '../API_Config';
 import { useNavigate } from 'react-router-dom';
-
+import './SignUp.css';
 import axios from 'axios';
 
 function SignUp1() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email_phone: '',
-    password: '',
-    re_password: '',
+    Email: '',
+    passwordHash: '',
   });
 
   const handleChange = (e) => {
@@ -28,7 +27,7 @@ function SignUp1() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(API_URL + 'registry', formData);
+      const response = await axios.post(API_URL + '/register', formData);
 
       if (!response) {
         console.error('Empty response received');
@@ -65,8 +64,8 @@ function SignUp1() {
 
             <input
               type="text"
-              placeholder="Enter Email / Phone Number"
-              name="email_phone"
+              placeholder="Enter Email"
+              name="Email"
               onChange={handleChange}
               className="email_phone-Input"
             />
@@ -77,13 +76,13 @@ function SignUp1() {
               onChange={handleChange}
               className="password-Input"
             />
-            <input
+            {/* <input
               type="text"
               placeholder="Type password again"
               name="re_password"
               onChange={handleChange}
               className="repassword-Input"
-            />
+            /> */}
 
             <button type="submit" className="register-Btn">
               <b>Register</b>
