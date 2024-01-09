@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import SignInLogo from '../assets/logos/HealthInsurance.png';
-import GoogleIcon from '../assets/images/google.png';
-import FacebookIcon from '../assets/images/facebook.png';
-import TwitterIcon from '../assets/images/twitter.png';
+import SignInLogo from '../../assets/logos/HealthInsurance.png';
+import GoogleIcon from '../../assets/images/google.png';
+import FacebookIcon from '../../assets/images/facebook.png';
+import TwitterIcon from '../../assets/images/twitter.png';
 import { NavLink } from 'react-bootstrap';
-import { Button, Container, Nav, Navbar as NavbarBs } from 'react-bootstrap';
+import { Container, Nav, Navbar as NavbarBs } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from './API_Config';
+import { API_URL } from '../API_Config';
+import { Button } from '@chakra-ui/react';
+import './SignIn.css';
 import axios from 'axios';
 
 function SignIn() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email_phone: '',
+    email: '',
     password: '',
   });
 
@@ -29,7 +31,7 @@ function SignIn() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(API_URL + 'login', formData);
+      const response = await axios.post(API_URL + '/login', formData);
 
       if (!response) {
         console.error('Empty response received');

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SignUpLogo from '../../assets/logos/HealthInsurance.png';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../API_Config';
+import './SignUp.css';
 import axios from 'axios';
 
 function SignUp2() {
@@ -23,7 +24,7 @@ function SignUp2() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(API_URL + 'registryVerify', formData);
+      const response = await axios.post(API_URL + '/registryVerify', formData);
 
       if (!response) {
         console.error('Empty response received');
