@@ -1,0 +1,43 @@
+.header {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    background-color: white;
+}
+
+.header img {
+    max-width: 190px;
+}
+
+.home {
+    margin-top: 210px;
+}
+
+.search{
+    width: 50%;
+    justify-content: center;
+}
+
+.search--input{
+    border: solid 2px gray;
+    border-radius: 5px;
+    padding-left: 5px;
+    width: 50%;
+}
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+}
+
+.content {
+    overflow: auto;
+    margin-left: 205px;
+}
+
+.home .content .col-md-3 {
+    border: 2px solid white;
+}
+

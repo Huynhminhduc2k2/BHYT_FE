@@ -13,6 +13,7 @@
 .SignUp-Form{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .SignUp-Form-Title{
@@ -21,7 +22,7 @@
 }
 
 .repassword-Input, .code-Input{
-    width: 350px;
+    width: 370px;
     height: 50px;
     border-radius: 5px;
     border: #d1d1d1 solid 2px;
