@@ -1,0 +1,54 @@
+.requestForm--container{
+    padding: 20px 40px;
+    display: flex;
+    gap: 10%;
+}
+
+.requestForm--container > input{
+    display: flex;
+    flex-direction: column;
+}
+
+.requestForm--title{
+    text-align: center;
+}
+
+.requestForm--info{
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(7, 50px);
+    gap: 10px;
+}
+
+.requestForm--info > input[type="text"]{
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.requestForm--info > input:last-child{
+    grid-column: span 2;
+    font-weight: bold;
+} 
+
+.requestForm--service{
+    display: flex;
+    flex-direction: column;
+}
+
+.userService{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.userService--info{
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.userService--img{
+    width: 500px;
+    height: 350px;
+}
