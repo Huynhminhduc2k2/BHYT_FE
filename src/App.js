@@ -10,6 +10,7 @@ import InsuranceRegistrationForm from './view/InsuranceRegisForm/RegisForm';
 import Subscription from './view/ChooseSubscription/Subscription';
 import Payment from './view/Payment/Payment';
 import UserProfile from './view/Profile/Profile';
+import UserRequestForm from './view/RequestPaymentForm/UserRequestForm';
 
 import { ChakraProvider } from '@chakra-ui/react';
 import {
@@ -22,7 +23,7 @@ import {
 function App() {
   return (
     <>
-      <Router>
+      {/* <Router>
         <Routes>
           <Route path="/home" element={<MainPage />} />
           <Route path="/" element={<SignIn />} default />
@@ -34,7 +35,8 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/profile" element={<UserProfile />} />
         </Routes>
-      </Router>
+      </Router> */}
+      <UserRequestForm />
     </>
   );
 }

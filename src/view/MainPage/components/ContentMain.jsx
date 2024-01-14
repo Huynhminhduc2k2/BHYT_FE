@@ -6,8 +6,11 @@ import {
   FaTasks,
   FaCar,
 } from 'react-icons/fa';
+import DataRow from './RowContent';
 
 function ContentMain() {
+  // Nhận data truyền từ PostgreSQL (DBeaver) ở đây
+
   return (
     <div className="d-flex home">
       <div className="d-flex sidebar flex-column flex-shrink-0  bg-dark">
@@ -95,83 +98,12 @@ function ContentMain() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>Toyota</td>
-              <td>Corolla</td>
-              <td>Four R</td>
-              <td>
-                <button class="btn btn-info mx-2 ">R</button>
-                <button class="btn btn-success ">U</button>
-                <button class="btn btn-danger mx-2">D</button>
-              </td>
-            </tr>
-            <tr>
-              <td>1,001</td>
-              <td>Toyota</td>
-              <td>Corolla</td>
-              <td>Four R</td>
-              <td>
-                <button class="btn btn-info mx-2 ">R</button>
-                <button class="btn btn-success ">U</button>
-                <button class="btn btn-danger mx-2">D</button>
-              </td>
-            </tr>
-            <tr>
-              <td>1,001</td>
-              <td>Toyota</td>
-              <td>Corolla</td>
-              <td>Four R</td>
-              <td>
-                <button class="btn btn-info mx-2 ">R</button>
-                <button class="btn btn-success ">U</button>
-                <button class="btn btn-danger mx-2">D</button>
-              </td>
-            </tr>
-            <tr>
-              <td>1,001</td>
-              <td>Toyota</td>
-              <td>Corolla</td>
-              <td>Four R</td>
-              <td>
-                <button class="btn btn-info mx-2 ">R</button>
-                <button class="btn btn-success ">U</button>
-                <button class="btn btn-danger mx-2">D</button>
-              </td>
-            </tr>
-            <tr>
-              <td>1,001</td>
-              <td>Toyota</td>
-              <td>Corolla</td>
-              <td>Four R</td>
-              <td>
-                <button class="btn btn-info mx-2 ">R</button>
-                <button class="btn btn-success ">U</button>
-                <button class="btn btn-danger mx-2">D</button>
-              </td>
-            </tr>
-            <tr>
-              <td>1,001</td>
-              <td>Toyota</td>
-              <td>Corolla</td>
-              <td>Four R</td>
-              <td>
-                <button class="btn btn-info mx-2 ">R</button>
-                <button class="btn btn-success ">U</button>
-                <button class="btn btn-danger mx-2">D</button>
-              </td>
-            </tr>
-            <tr>
-              <td>1,001</td>
-              <td>Toyota</td>
-              <td>Corolla</td>
-              <td>Four R</td>
-              <td>
-                <button class="btn btn-info mx-2 ">R</button>
-                <button class="btn btn-success ">U</button>
-                <button class="btn btn-danger mx-2">D</button>
-              </td>
-            </tr>
+            <DataRow
+              no={1}
+              name="Bảo hiểm nhân thọ"
+              customer="Nhân"
+              due="Expired"
+            />
           </tbody>
         </table>
       </div>
