@@ -9,7 +9,8 @@ function SignUp2() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    code: '',
+    email: '',
+    otp: '',
   });
 
   const handleChange = (e) => {
@@ -22,9 +23,9 @@ function SignUp2() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData);
     try {
-      const response = await axios.post(API_URL + '/registryVerify', formData);
+      const response = await axios.post(API_URL + '/verifyOTP', formData);
 
       if (!response) {
         console.error('Empty response received');
@@ -33,7 +34,7 @@ function SignUp2() {
 
       console.log('Verify successful', response.data);
 
-      navigate('/signin');
+      navigate('/');
 
       alert('Verify successful');
     } catch (error) {
@@ -61,8 +62,15 @@ function SignUp2() {
 
             <input
               type="text"
-              placeholder="Enter Code"
-              name="code"
+              placeholder="Enter your sign up Email"
+              name="email"
+              onChange={handleChange}
+              className="code-Input"
+            />
+            <input
+              type="text"
+              placeholder="Enter OTP"
+              name="otp"
               onChange={handleChange}
               className="code-Input"
             />

@@ -11,23 +11,41 @@ function SignUp1() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    Email: '',
-    passwordHash: '',
+    fullName: 'string',
+    personID: 'string',
+    phoneNumber: 'string',
+    dob: 'string',
+    address: 'string',
+    email: 'user@example.com',
+    nation: 'string',
+    nationality: 'string',
+    sex: 'string',
+    password: 'string',
+    rePassword: 'string',
+    roles: ['string'],
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+
+    setFormData((prevData) =>
+      name === `roles`? 
+      {
+        ...prevData,
+        [name]: [value],
+      }
+      : {
+          ...prevData,
+          [name]: value,
+        },
+    );
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData); // Add this line
     try {
-      const response = await axios.post(API_URL + '/register', formData);
+      const response = await axios.post(API_URL + '/Register', formData);
 
       if (!response) {
         console.error('Empty response received');
@@ -64,25 +82,91 @@ function SignUp1() {
 
             <input
               type="text"
-              placeholder="Enter Email"
-              name="Email"
+              placeholder="Enter Fullname"
+              name="fullName"
               onChange={handleChange}
               className="email_phone-Input"
             />
             <input
               type="text"
-              placeholder="Password"
-              name="password"
+              placeholder="Enter personID"
+              name="personID"
               onChange={handleChange}
               className="password-Input"
             />
-            {/* <input
+            <input
               type="text"
-              placeholder="Type password again"
-              name="re_password"
+              placeholder="Enter Phone Number"
+              name="phoneNumber"
               onChange={handleChange}
               className="repassword-Input"
-            /> */}
+            />
+            <input
+              type="text"
+              placeholder="Enter Birthday"
+              name="dob"
+              onChange={handleChange}
+              className="repassword-Input"
+            />
+
+            <input
+              type="text"
+              placeholder="Enter Address"
+              onChange={handleChange}
+              name="address"
+              className="repassword-Input"
+            />
+
+            <input
+              type="text"
+              placeholder="Enter Email"
+              name="email"
+              onChange={handleChange}
+              className="repassword-Input"
+            />
+            <input
+              type="text"
+              placeholder="Enter Nation"
+              name="nation"
+              onChange={handleChange}
+              className="repassword-Input"
+            />
+            <input
+              type="text"
+              placeholder="Enter Nationality"
+              name="nationality"
+              onChange={handleChange}
+              className="repassword-Input"
+            />
+            <input
+              type="text"
+              placeholder="Enter Gender"
+              name="sex"
+              onChange={handleChange}
+              className="repassword-Input"
+            />
+            <input
+              type="text"
+              placeholder="Enter Password"
+              name="password"
+              onChange={handleChange}
+              className="repassword-Input"
+            />
+            <input
+              type="text"
+              placeholder="Re-enter Password"
+              name="rePassword"
+              onChange={handleChange}
+              className="repassword-Input"
+            />
+
+            <input
+              type="text"
+              placeholder="Enter Role"
+              name="roles"
+              onChange={handleChange}
+              className="repassword-Input"
+            />
 
             <button type="submit" className="register-Btn">
               <b>Register</b>

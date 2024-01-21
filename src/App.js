@@ -23,7 +23,7 @@ import {
 function App() {
   return (
     <>
-      {/* <Router>
+      <Router>
         <Routes>
           <Route path="/home" element={<MainPage />} />
           <Route path="/" element={<SignIn />} default />
@@ -35,8 +35,8 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/profile" element={<UserProfile />} />
         </Routes>
-      </Router> */}
-      <UserRequestForm />
+      </Router>
+      {/* <UserRequestForm /> */}
     </>
   );
 }
