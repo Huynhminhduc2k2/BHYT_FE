@@ -11,7 +11,7 @@ import Subscription from './view/ChooseSubscription/Subscription';
 import Payment from './view/Payment/Payment';
 import UserProfile from './view/Profile/Profile';
 import UserRequestForm from './view/RequestPaymentForm/UserRequestForm';
-
+import Management from './view/Management/Management';
 import { ChakraProvider } from '@chakra-ui/react';
 import {
   BrowserRouter as Router,
@@ -23,20 +23,21 @@ import {
 function App() {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/home" element={<MainPage />} />
-          <Route path="/" element={<SignIn />} default />
-          <Route path="/signup" element={<SignUp1 />} />
-          <Route path="/signupVerify" element={<SignUp2 />} />
-          <Route path="/insuregis" element={<InsuranceRegistrationForm />} />
-          <Route path="/subscription" element={<Subscription />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="/profile" element={<UserProfile />} />
-        </Routes>
-      </Router>
-      {/* <UserRequestForm /> */}
+      {
+        <Router>
+          <Routes>
+            <Route path="/home" element={<MainPage />} />
+            <Route path="/" element={<SignIn />} default />
+            <Route path="/signup" element={<SignUp1 />} />
+            <Route path="/signupVerify" element={<SignUp2 />} />
+            <Route path="/insuregis" element={<InsuranceRegistrationForm />} />
+            <Route path="/subscription" element={<Subscription />} />
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/management" element={<Management />} />
+          </Routes>
+        </Router>
+      }
     </>
   );
 }
