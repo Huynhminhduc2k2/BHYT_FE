@@ -1,43 +1,64 @@
 .header {
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    left: 0px;
-    background-color: white;
+    background-image: url(https://img.freepik.com/free-vector/medical-healthcare-system-protection-shield-background-design_1017-24590.jpg?w=1060&t=st=1705993865~exp=1705994465~hmac=2b5acb0be7c3cc765f1575c111077976c395324d557d3cc1af95ec05a5f38466);
+    background-repeat: no-repeat;
+    background-size:cover;    
 }
 
 .header img {
     max-width: 190px;
 }
 
-.home {
-    margin-top: 210px;
+.Mainpage{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    border-style: none;
 }
 
-.search{
-    width: 50%;
-    justify-content: center;
+.insurance--search{
+    padding: 8px;
 }
 
-.search--input{
+.insurance--search--input{
     border: solid 2px gray;
     border-radius: 5px;
-    padding-left: 5px;
-    width: 50%;
+    text-indent: 5px;
+}
+
+.home{
+    height: 100%;
 }
 
 .sidebar {
     width: 200px;
-    height: 100vh;
-    position: fixed;
-}
+    height: 100%;
+    position:relative;
+} 
 
 .content {
     overflow: auto;
-    margin-left: 205px;
+    margin: 10px;
+    padding: 0;
+    border-radius: 5px;
 }
 
-.home .content .col-md-3 {
-    border: 2px solid white;
+.content--Summary{
+    margin: auto;
 }
 
+.content--Summary p{
+    text-align: center;
+    margin: 5px;
+}
+
+.content--Summary div{
+    padding: 0px;
+    margin: 0;
+    width: 200px !important;
+
+}
+
+.insurance--search--title{
+    margin: 0;
+    padding: 8px;
+}

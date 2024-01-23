@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FaCartArrowDown,
   FaUserAlt,
@@ -9,11 +9,45 @@ import {
 import DataRow from './RowContent';
 
 function ContentMain() {
-  // Nhận data truyền từ PostgreSQL (DBeaver) ở đây
+  const [insuranceList, setInsuranceList] = useState([]);
+
+  // useEffect(() => {
+  //   async function getInsurances() {
+  //     const token = localStorage.getItem('token');
+  //     try {
+  //       if (token) {
+  //         const options = {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //             'Content-Type': 'application/json',
+  //           },
+  //         };
+
+  //         const res = await fetch('/Insurance/......', options);
+  //         const data = await res.json();
+  //         setInsuranceList(data.data);
+
+  //         if (!res.ok) {
+  //           throw new Error(`Error: ${res.status}`);
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error('Error:', error);
+  //     }
+  //   }
+
+  //   getInsurances();
+  // }, []);
+
+  // const insurances = insuranceList.map((item) => {
+  //   <DataRow
+  //     {...item}
+  //   />;
+  // });
 
   return (
     <div className="d-flex home">
-      <div className="d-flex sidebar flex-column flex-shrink-0  bg-dark">
+      <div className="d-flex sidebar flex-column flex-shrink-0 bg-dark">
         <ul className="nav nav-pills flex-column mb-auto px-0 mt-4">
           <li className="nav-item ">
             <a href="" className="nav-link text-white active">
@@ -38,72 +72,103 @@ function ContentMain() {
         </ul>
       </div>
 
-      <div className="content container mt-3">
-        <div className="row">
+      <div className="content container">
+        <div className="content--Summary row gap-3 mt-2 mb-2">
           <div
-            className="col-md-3 text-white col bg-success d-flex 
-                    justify-content-around px-1 py-3 rounded"
+            className="text-white col bg-success d-flex 
+                    justify-content-around rounded align-items-center py-3"
           >
             <p>Total Insurances</p>
+            {insuranceList.length}
             <FaCartArrowDown />
           </div>
           <div
-            className="col-md-3 text-white col bg-danger d-flex 
-                    justify-content-around px-1 py-3 rounded"
+            className="text-white col bg-danger d-flex 
+                    justify-content-around rounded align-items-center py-3"
           >
             <p>Total Customers</p>
+            {insuranceList.length}
             <FaCartArrowDown />
           </div>
           <div
-            className="col-md-3 text-white col bg-warning d-flex 
-                    justify-content-around px-1 py-3 rounded"
+            className="text-white col bg-warning d-flex 
+                    justify-content-around rounded align-items-center py-3"
           >
             <p>Total Incomes</p>
+            {insuranceList.length}
             <FaCartArrowDown />
           </div>
           <div
-            className="col-md-3 text-white col bg-primary d-flex 
-                    justify-content-around px-1 py-3 rounded"
+            className="text-white col bg-primary d-flex 
+                    justify-content-around rounded align-items-center py-3"
           >
             <p>Total Payments</p>
+            {insuranceList.length}
             <FaCartArrowDown />
           </div>
         </div>
 
         <div className="d-flex justify-content-between mt-3">
-          <h2>Insurances</h2>
+          <h2 className="insurance--search--title">Insurances</h2>
 
-          <div className="d-flex gap-2 search ">
+          <div className="d-flex gap-2 insurance--search">
             <input
               type="text"
               placeholder="Searching"
-              className="search--input"
+              className="insurance--search--input"
             />
             <button type="submit" className="btn btn-success">
               {' '}
               Search{' '}
             </button>
-          </div>
 
-          <button className="btn btn-success">+ Add</button>
+            <button className="btn btn-secondary text-white">+ Add</button>
+          </div>
         </div>
         <table class="table w-100">
           <thead>
             <tr>
-              <th scope="col">No</th>
-              <th scope="col">Name</th>
-              <th scope="col">Customer</th>
-              <th scope="col">Due</th>
-              <th scope="col">Manage</th>
+              <th scope="col" className="text-center">
+                InsuranceID
+              </th>
+              <th scope="col" className="text-center">
+                UserID
+              </th>
+              <th scope="col" className="text-center">
+                InsuranceType
+              </th>
+              <th scope="col" className="text-center">
+                Status
+              </th>
+              <th scope="col" className="text-center">
+                PremiumAmount
+              </th>
+              <th scope="col" className="text-center">
+                StartDate
+              </th>
+              <th scope="col" className="text-center">
+                EndDate
+              </th>
+              <th scope="col" className="text-center">
+                LastPaymentDate
+              </th>
+              <th scope="col" className="text-center">
+                IsAutoRenewal
+              </th>
+              <th scope="col" className="text-center">
+                CreatedBy
+              </th>
+              <th scope="col" className="text-center">
+                UpdatedBy
+              </th>
+              <th scope="col" className="text-center">
+                Manage
+              </th>
             </tr>
           </thead>
           <tbody>
-            <DataRow
-              no={1}
-              name="Bảo hiểm nhân thọ"
-              customer="Nhân"
-              due="Expired"
-            />
+            {/* {insuranceList.length > 0 && {insurances}} />} */}
+            <DataRow />
           </tbody>
         </table>
       </div>
