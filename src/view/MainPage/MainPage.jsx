@@ -6,9 +6,9 @@ import ContentMain from './components/ContentMain.jsx';
 
 function MainPage() {
   return (
-    <div>
-        <HeaderMain />
-        <ContentMain />
+    <div className="Mainpage">
+      <HeaderMain />
+      <ContentMain />
     </div>
   );
 }

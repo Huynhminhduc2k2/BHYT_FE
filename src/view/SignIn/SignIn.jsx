@@ -40,6 +40,8 @@ function SignIn() {
 
       console.log('Login successful', response.data);
 
+      localStorage.setItem('token', response.data.token);
+
       navigate('/home');
 
       alert('Login successful');
