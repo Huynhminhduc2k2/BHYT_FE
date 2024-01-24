@@ -62,3 +62,15 @@
     margin: 0;
     padding: 8px;
 }
+
+.insurance--table--content{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.isRenewal{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: solid 1px black;
+}
