@@ -43,6 +43,7 @@ function HeaderMainUser() {
 
       // Show a success message to the user
       alert('Logout successful');
+
     } catch (error) {
       console.error('Logout failed', error.response?.data);
 

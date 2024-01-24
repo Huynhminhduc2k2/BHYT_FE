@@ -59,6 +59,7 @@ function SignIn() {
       navigate('/home');
 
       alert('Login successful');
+      window.location.reload(false);
     } catch (error) {
       console.error('Login failed', error.response?.data);
 
