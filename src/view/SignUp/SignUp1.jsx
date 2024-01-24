@@ -29,15 +29,15 @@ function SignUp1() {
     const { name, value } = e.target;
 
     setFormData((prevData) =>
-      name === `roles`? 
-      {
-        ...prevData,
-        [name]: [value],
-      }
-      : {
-          ...prevData,
-          [name]: value,
-        },
+      name === `roles`
+        ? {
+            ...prevData,
+            [name]: [value],
+          }
+        : {
+            ...prevData,
+            [name]: value,
+          },
     );
   };
 

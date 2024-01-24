@@ -1,19 +1,33 @@
 import React from 'react';
 
 export default function DataRow(props) {
+  const [isRenewal, setIsRenewal] = React.useState(props.isAutoRenewal);
+
+  const styles = {
+    backgroundColor: isRenewal ? 'green' : '',
+  };
+
   return (
-    <tr>
-      <td>{props.InsuranceID}</td>
-      <td>{props.UserID}</td>
-      <td>{props.InsuranceType}</td>
-      <td>{props.Status}</td>
-      <td>{props.PremiumAmount}</td>
-      <td>{props.StartDate}</td>
-      <td>{props.EndDate}</td>
-      <td>{props.LastPaymentDate}</td>
-      <td>{props.IsAutoRenewal}</td>
-      <td>{props.CreatedBy}</td>
-      <td>{props.UpdatedBy}</td>
+    <tr className="insurance--table--content">
+      <td>{props.insuranceID}</td>
+      <td>{props.userID}</td>
+      <td>{props.type}</td>
+      <td>{props.status}</td>
+      <td>{props.premiumAmount}</td>
+      <td>{props.startDate}</td>
+      <td>{props.endDate}</td>
+      <td>{props.lastPaymentDate}</td>
+      <td>
+        <button
+          className="isRenewal"
+          style={styles}
+          onClick={() => {
+            setIsRenewal((prevRenewal) => !prevRenewal);
+          }}
+        ></button>
+      </td>
+      {/* <td>{props.createdBy}</td>
+      <td>{props.updatedBy}</td> */}
       <td>
         <button class="btn btn-info mx-1 text-white ">R</button>
         <button class="btn btn-success mx-1 ">U</button>

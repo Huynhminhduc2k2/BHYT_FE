@@ -40,7 +40,21 @@ function SignIn() {
 
       console.log('Login successful', response.data);
 
+      const options = {
+        headers: {
+          Authorization: `Bearer ${response.data.token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const res = await fetch(
+        'https://localhost:7067/api/User/GetCurrentUser',
+        options,
+      );
+      const data = await res.json();
+
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('role', data.role[0]);
 
       navigate('/home');
 

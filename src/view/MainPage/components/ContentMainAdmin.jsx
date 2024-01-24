@@ -8,42 +8,42 @@ import {
 } from 'react-icons/fa';
 import DataRow from './RowContent';
 
-function ContentMain() {
+function ContentMainAdmin() {
   const [insuranceList, setInsuranceList] = useState([]);
 
-  // useEffect(() => {
-  //   async function getInsurances() {
-  //     const token = localStorage.getItem('token');
-  //     try {
-  //       if (token) {
-  //         const options = {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //             'Content-Type': 'application/json',
-  //           },
-  //         };
+  useEffect(() => {
+    async function getInsurances() {
+      const token = localStorage.getItem('token');
+      try {
+        if (token) {
+          const options = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          };
 
-  //         const res = await fetch('/Insurance/......', options);
-  //         const data = await res.json();
-  //         setInsuranceList(data.data);
+          const res = await fetch(
+            'https://localhost:7067/v1/api/Insurance/all',
+            options,
+          );
+          const data = await res.json();
 
-  //         if (!res.ok) {
-  //           throw new Error(`Error: ${res.status}`);
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error('Error:', error);
-  //     }
-  //   }
+          setInsuranceList(data);
 
-  //   getInsurances();
-  // }, []);
+          if (!res.ok) {
+            throw new Error(`Error: ${res.status}`);
+          }
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
 
-  // const insurances = insuranceList.map((item) => {
-  //   <DataRow
-  //     {...item}
-  //   />;
-  // });
+    getInsurances();
+  }, []);
+
+  const insurances = insuranceList.map((item) => <DataRow {...item} />);
 
   return (
     <div className="d-flex home">
@@ -75,7 +75,7 @@ function ContentMain() {
       <div className="content container">
         <div className="content--Summary row gap-3 mt-2 mb-2">
           <div
-            className="text-white col bg-success d-flex 
+            className="text-white col bg-success d-flex
                     justify-content-around rounded align-items-center py-3"
           >
             <p>Total Insurances</p>
@@ -83,7 +83,7 @@ function ContentMain() {
             <FaCartArrowDown />
           </div>
           <div
-            className="text-white col bg-danger d-flex 
+            className="text-white col bg-danger d-flex
                     justify-content-around rounded align-items-center py-3"
           >
             <p>Total Customers</p>
@@ -91,7 +91,7 @@ function ContentMain() {
             <FaCartArrowDown />
           </div>
           <div
-            className="text-white col bg-warning d-flex 
+            className="text-white col bg-warning d-flex
                     justify-content-around rounded align-items-center py-3"
           >
             <p>Total Incomes</p>
@@ -99,7 +99,7 @@ function ContentMain() {
             <FaCartArrowDown />
           </div>
           <div
-            className="text-white col bg-primary d-flex 
+            className="text-white col bg-primary d-flex
                     justify-content-around rounded align-items-center py-3"
           >
             <p>Total Payments</p>
@@ -135,7 +135,7 @@ function ContentMain() {
                 UserID
               </th>
               <th scope="col" className="text-center">
-                InsuranceType
+                Type
               </th>
               <th scope="col" className="text-center">
                 Status
@@ -155,20 +155,21 @@ function ContentMain() {
               <th scope="col" className="text-center">
                 IsAutoRenewal
               </th>
-              <th scope="col" className="text-center">
+              {/* <th scope="col" className="text-center">
                 CreatedBy
               </th>
               <th scope="col" className="text-center">
                 UpdatedBy
-              </th>
+              </th> */}
               <th scope="col" className="text-center">
                 Manage
               </th>
             </tr>
           </thead>
           <tbody>
-            {/* {insuranceList.length > 0 && {insurances}} />} */}
-            <DataRow />
+            {/* {insuranceList.length > 0 && { insurances }} */}
+            {/* <DataRow id= {5} type="hello"/> */}
+            {insurances}
           </tbody>
         </table>
       </div>
@@ -176,4 +177,4 @@ function ContentMain() {
   );
 }
 
-export default ContentMain;
+export default ContentMainAdmin;
