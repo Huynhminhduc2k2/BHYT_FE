@@ -3,58 +3,82 @@ import axios from 'axios';
 import './Management.css';
 import { Button } from '@chakra-ui/react';
 const SubscriptionComponent = () => {
-  const [customerId, setCustomerId] = useState('');
-  const [subscriptions, setSubscriptions] = useState([]);
+  const [email, setEmail] = useState('');
+  const [subscriptionDetails, setSubscriptionDetails] = useState(null);
+  const [error, setError] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
 
-  const handleCustomerIdChange = (e) => {
-    setCustomerId(e.target.value);
+  useEffect(() => {
+    async function GetCurrentUser() {
+      const token = localStorage.getItem('token');
+      try {
+        if (token) {
+          const options = {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          };
+
+          const res = await fetch(
+            'https://localhost:7067/api/User/GetCurrentUser',
+            options,
+          );
+          const data = await res.json();
+
+          setUserInfo(data);
+
+          if (!res.ok) {
+            throw new Error(Error: ${res,.status});
+          }
+        
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    GetCurrentUser();
+  }, []);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
-  const handleGetSubscription = async () => {
+  const getSubscription = async () => {
     try {
-      const response = await axios.get(`https://localhost:7067/v2/api/Payment/GetSubscription/${customerId}`);
-      setSubscriptions(response.data);
+      const response = await fetch(`https://localhost:7067/v2/api/Payment/GetSubscription?email=${userInfo.email}`);
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubscriptionDetails(data);
+        setError(null);
+      } else {
+        setSubscriptionDetails(null);
+        setError(data.message || 'An error occurred');
+      }
     } catch (error) {
-      console.error('Error fetching subscription data:', error);
+      setSubscriptionDetails(null);
+      setError('An error occurred while fetching data');
     }
   };
 
-  useEffect(() => {
-    // Fetch initial data or perform other actions on component mount if needed
-  }, []);
-
   return (
-    <div className="subscription-container">
-      <h2>Subscription Information</h2>
-      <div className="input-container">
-        <label htmlFor="customerId">Customer ID:</label>
-        <input
-          type="text"
-          id="customerId"
-          value={customerId}
-          onChange={handleCustomerIdChange}
-          placeholder="Enter Customer ID"
-        />
-        <Button onClick={handleGetSubscription}>Get Subscription</Button>
-      </div>
+    <div>
+      <h1>Subscription Information</h1>
+     
+      <button onClick={getSubscription}>Get Subscription</button>
 
-      <div className="subscription-details">
-        {subscriptions.length > 0 ? (
-          <ul>
-            {subscriptions.map((subscription) => (
-              <li key={subscription.SubscriptionId}>
-                <strong>Subscription ID:</strong> {subscription.SubscriptionId} | 
-                <strong> Status:</strong> {subscription.Status} | 
-                <strong> Price ID:</strong> {subscription.PriceId} | 
-                <strong> Start:</strong> {subscription.CurrentPeriodStart} | 
-                <strong> End:</strong> {subscription.CurrentPeriodEnd}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No subscriptions found.</p>
-        )}
-      </div>
+      {subscriptionDetails && (
+        <div>
+          <h2>Subscription Details</h2>
+          <p>Subscription ID: {subscriptionDetails.subscriptionId}</p>
+          <p>Status: {subscriptionDetails.status}</p>
+          <p>Price ID: {subscriptionDetails.PriceId}</p>
+          <p>Current Period Start: {subscriptionDetails.currentPeriodStart}</p>
+          <p>Current Period End: {subscriptionDetails.currentPeriodEnd}</p>
+        </div>
+      )}
+
+      {error && <p>Error: {error}</p>}
     </div>
   );
 };
