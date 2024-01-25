@@ -14,16 +14,19 @@ function ContentMainAdmin() {
 
   const [insurance, setInsurance] = React.useState({});
 
+  const [actionType, setActionType] = React.useState('');
+
   function outDetail() {
     setSeeDetail(!seeDetail);
   }
 
-  async function toggleDetail(id) {
+  async function toggleDetail(id, actionType) {
     setSeeDetail(!seeDetail);
     try {
       const token = localStorage.getItem('token');
 
-      console.log(id);
+      //console.log(id);
+      //console.log(actionType);
 
       const options = {
         headers: {
@@ -42,7 +45,9 @@ function ContentMainAdmin() {
         return;
       }
 
-      setInsurance(response.data); // Set the response.data to the state
+      setInsurance(response.data.insuranceResp); // Set the response.data to the state
+
+      setActionType(actionType);
     } catch (error) {
       console.error('Detail failed', error.response?.data);
 
@@ -60,6 +65,8 @@ function ContentMainAdmin() {
   }
 
   const [insuranceList, setInsuranceList] = useState([]);
+
+  console.log(actionType);
 
   useEffect(() => {
     async function getInsurances() {
@@ -96,9 +103,10 @@ function ContentMainAdmin() {
   const insurances = insuranceList.map((item) => (
     <DataRow
       {...item}
-      on={() => {
-        toggleDetail(item.insuranceID);
-      }}
+      // on={() => {
+      //   toggleDetail(item.insuranceID);
+      // }}
+      on={toggleDetail}
     />
   ));
 
@@ -211,9 +219,12 @@ function ContentMainAdmin() {
     }
   }
 
+  const isUp = actionType === 'U' && seeDetail ? true : false;
+  const isRead = actionType === 'R' && seeDetail ? true : false;
+
   return (
     <div className="d-flex home">
-      {/* {seeDetail && (
+      {isRead && (
         <div className="overlay">
           <div className="overlay-content">
             <h4>InsuranceID:</h4>
@@ -250,9 +261,8 @@ function ContentMainAdmin() {
             </button>
           </div>
         </div>
-      )} */}
-
-      {seeDetail && (
+      )}
+      {isUp && (
         <div className="overlay">
           <div className="overlay-content-up">
             <h2>{`Update Insurance ${insurance.insuranceID} (${insurance.type})`}</h2>
