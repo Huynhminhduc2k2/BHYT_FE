@@ -28,10 +28,16 @@ export default function DataRow(props) {
           ></button>
         </td>
         <td className="d-flex">
-          <button class="btn btn-info text-white mx-1" onClick={props.on}>
+          <button
+            class="btn btn-info text-white mx-1"
+            onClick={() => props.on(props.insuranceID, 'R')}
+          >
             R
           </button>
-          <button class="btn btn-success mx-1" onClick={props.on}>
+          <button
+            class="btn btn-success mx-1"
+            onClick={() => props.on(props.insuranceID, 'U')}
+          >
             U
           </button>
           <button class="btn btn-danger mx-1">D</button>
