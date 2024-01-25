@@ -9,6 +9,7 @@ import HeaderMainUser from './components/HeaderMainUser.jsx';
 export const isAdmin = localStorage.getItem('role') === 'ADMIN' ? true : false;
 
 function MainPage() {
+
   return (
     <div className="Mainpage">
       {isAdmin ? (
