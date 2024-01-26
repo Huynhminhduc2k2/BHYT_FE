@@ -9,18 +9,26 @@ import HeaderMainUser from './components/HeaderMainUser.jsx';
 export const isAdmin = localStorage.getItem('role') === 'ADMIN' ? true : false;
 
 function MainPage() {
+  const [navPage, setNavPage] = React.useState('');
+
+  function toggleNavPage(name) {
+    // console.log(name);
+    setNavPage(name);
+  }
+
+  // console.log(navPage);
 
   return (
     <div className="Mainpage">
       {isAdmin ? (
         <div>
-          <HeaderMainAdmin />
-          <ContentMainAdmin />
+          <HeaderMainAdmin page={toggleNavPage} />
+          <ContentMainAdmin setNav={navPage} />
         </div>
       ) : (
         <div>
-          <HeaderMainUser />
-          <ContentMainUser />
+          <HeaderMainUser page={toggleNavPage} />
+          <ContentMainUser setNav={navPage} />
         </div>
       )}
     </div>

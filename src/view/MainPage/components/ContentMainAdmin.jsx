@@ -7,9 +7,13 @@ import {
   FaCar,
 } from 'react-icons/fa';
 import DataRow from './RowContent';
+import Contact from '../../Contact/Contact';
+import About from '../../About/About';
 import axios from 'axios';
 
-function ContentMainAdmin() {
+function ContentMainAdmin(props) {
+  const [refresh, setRefresh] = useState(false);
+
   const [seeDetail, setSeeDetail] = React.useState(false);
 
   const [insurance, setInsurance] = React.useState({});
@@ -66,7 +70,7 @@ function ContentMainAdmin() {
 
   const [insuranceList, setInsuranceList] = useState([]);
 
-  console.log(actionType);
+  const [isAddingInsurance, setIsAddingInsurance] = useState(false);
 
   useEffect(() => {
     async function getInsurances() {
@@ -98,19 +102,11 @@ function ContentMainAdmin() {
     }
 
     getInsurances();
-  }, [seeDetail]);
+  }, [refresh]);
 
   const insurances = insuranceList.map((item) => (
-    <DataRow
-      {...item}
-      // on={() => {
-      //   toggleDetail(item.insuranceID);
-      // }}
-      on={toggleDetail}
-    />
+    <DataRow {...item} on={toggleDetail} />
   ));
-
-  const [isAddingInsurance, setIsAddingInsurance] = useState(false);
 
   function toggleAddInsurance() {
     setIsAddingInsurance(!isAddingInsurance);
@@ -147,6 +143,7 @@ function ContentMainAdmin() {
         }
 
         alert('Add successful');
+        setRefresh((prevRefresh) => !prevRefresh);
       }
     } catch (error) {
       console.error('Error: ', error);
@@ -203,6 +200,7 @@ function ContentMainAdmin() {
       }
 
       alert('Update success');
+      setRefresh((prevRefresh) => !prevRefresh);
     } catch (error) {
       console.error('Detail failed', error.response?.data);
 
@@ -222,7 +220,9 @@ function ContentMainAdmin() {
   const isUp = actionType === 'U' && seeDetail ? true : false;
   const isRead = actionType === 'R' && seeDetail ? true : false;
 
-  return (
+  console.log(props.setNav);
+
+  const Home = (
     <div className="d-flex home">
       {isRead && (
         <div className="overlay">
@@ -332,7 +332,7 @@ function ContentMainAdmin() {
         <div className="content--Summary row gap-3 mt-2 mb-2">
           <div
             className="text-white col bg-success d-flex
-                    justify-content-around rounded align-items-center py-3"
+                justify-content-around rounded align-items-center py-3"
           >
             <p>Total Insurances</p>
             {insuranceList.length}
@@ -340,7 +340,7 @@ function ContentMainAdmin() {
           </div>
           <div
             className="text-white col bg-danger d-flex
-                    justify-content-around rounded align-items-center py-3"
+                justify-content-around rounded align-items-center py-3"
           >
             <p>Total Customers</p>
             {insuranceList.length}
@@ -348,7 +348,7 @@ function ContentMainAdmin() {
           </div>
           <div
             className="text-white col bg-warning d-flex
-                    justify-content-around rounded align-items-center py-3"
+                justify-content-around rounded align-items-center py-3"
           >
             <p>Total Incomes</p>
             {insuranceList.length}
@@ -356,7 +356,7 @@ function ContentMainAdmin() {
           </div>
           <div
             className="text-white col bg-primary d-flex
-                    justify-content-around rounded align-items-center py-3"
+                justify-content-around rounded align-items-center py-3"
           >
             <p>Total Payments</p>
             {insuranceList.length}
@@ -379,15 +379,25 @@ function ContentMainAdmin() {
             </button>
 
             {isAddingInsurance && (
-              <form onSubmit={handleSubmit} className="insurance--add--form">
-                <input
-                  type="text"
-                  placeholder="Type Insurance Type"
-                  className="insurance--search--input"
-                  onChange={handleChangeAdd}
-                  value={formData.insuranceType}
+              <form
+                onSubmit={handleSubmit}
+                className="insurance--add--form gap-2"
+              >
+                <select
+                  id="insuAdd"
                   name="insuranceType"
-                />
+                  onChange={handleChangeAdd}
+                  className="insurance--search--input"
+                  value={formData.insuranceType}
+                  defaultValue=""
+                >
+                  <option value="" selected disabled hidden>
+                    --Choose--
+                  </option>
+                  <option value="STANDARD">Standard - Price: $100</option>
+                  <option value="ADVANDCE">Advance - Price: $200</option>
+                  <option value="PREMIUM">Premium - Price: $300</option>
+                </select>
 
                 <button
                   type="submit"
@@ -397,7 +407,6 @@ function ContentMainAdmin() {
                 </button>
               </form>
             )}
-
             <button
               className="btn btn-secondary text-white"
               onClick={toggleAddInsurance}
@@ -441,15 +450,27 @@ function ContentMainAdmin() {
               </th>
             </tr>
           </thead>
-          <tbody>
-            {/* {insuranceList.length > 0 && { insurances }} */}
-            {/* <DataRow id={5} type="hello" seeDetail={props.overLay} /> */}
-            {insurances}
-          </tbody>
+          <tbody>{insurances}</tbody>
         </table>
       </div>
     </div>
   );
+
+  let page = '';
+
+  switch (props.setNav) {
+    case 'Contact':
+      page = <Contact />;
+      break;
+    case 'About':
+      page = <About />;
+      break;
+    default:
+      page = Home;
+      break;
+  }
+
+  return page;
 }
 
 export default ContentMainAdmin;
