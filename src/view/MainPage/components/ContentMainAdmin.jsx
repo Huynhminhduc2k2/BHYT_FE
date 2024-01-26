@@ -105,7 +105,7 @@ function ContentMainAdmin(props) {
   }, [refresh]);
 
   const insurances = insuranceList.map((item) => (
-    <DataRow {...item} on={toggleDetail} />
+    <DataRow key={item.insuranceID} {...item} on={toggleDetail} />
   ));
 
   function toggleAddInsurance() {
