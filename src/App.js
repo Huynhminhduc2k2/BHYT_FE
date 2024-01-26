@@ -12,6 +12,7 @@ import UserProfile from './view/Profile/Profile';
 import UserRequestForm from './view/RequestPaymentForm/UserRequestForm';
 import Management from './view/Management/Management';
 import { ChakraProvider } from '@chakra-ui/react';
+import ThankYouPage from './view/AfterCheckout/ThankyouPage';
 import {
   BrowserRouter as Router,
   Route,
@@ -34,6 +35,7 @@ function App() {
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/management" element={<Management />} />
+            <Route path="/thankyou" element={<ThankYouPage />} />
           </Routes>
         </Router>
       }
