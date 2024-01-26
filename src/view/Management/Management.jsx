@@ -21,11 +21,14 @@ const SubscriptionComponent = () => {
           return;
         }
 
-        const response = await axios.get('https://localhost:7067/api/User/GetCurrentUser', {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await axios.get(
+          'https://localhost:7067/api/User/GetCurrentUser',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
 
         setUserInfo(response.data);
         setError(null);
@@ -38,13 +41,18 @@ const SubscriptionComponent = () => {
     getCurrentUser();
   }, []);
 
-
-
-
+  useEffect(() => {
+    // Call handleGetSubscription when userInfo changes
+    if (userInfo) {
+      handleGetSubscription();
+    }
+  }, [userInfo]);
 
   const handleGetSubscription = async () => {
     try {
-      const response = await axios.get(`https://localhost:7067/v2/api/Payment/GetSubscription?email=${userInfo.email}`);
+      const response = await axios.get(
+        `https://localhost:7067/v2/api/Payment/GetSubscription?email=${userInfo.email}`,
+      );
       setSubscriptions(response.data);
       setError(null);
     } catch (error) {
@@ -53,14 +61,10 @@ const SubscriptionComponent = () => {
     }
   };
 
-  useEffect(() => {
-  }, []);
-
-
   const handleCancelSubscription = async (subscriptionId) => {
     try {
       const token = localStorage.getItem('token');
-  
+
       const response = await axios.post(
         'https://localhost:7067/v2/api/Payment/CancelSubscription',
         {},
@@ -68,8 +72,9 @@ const SubscriptionComponent = () => {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
-          },params: {subscriptionId: subscriptionId}
-        }
+          },
+          params: { subscriptionId: subscriptionId },
+        },
       );
       console.log(response.data);
       handleGetSubscription();
@@ -78,44 +83,60 @@ const SubscriptionComponent = () => {
     }
   };
 
-
-  return (
-    
-
+  const subPage = (
     <div className="subscription-container">
-      <div className="Mainpage">
-        <HeaderMainUser />
-        <ContentMainUser />
-    </div>
       <h2>Subscription Information</h2>
-      <div className="input-container">
-        <Button onClick={handleGetSubscription}>Get Subscription</Button>
-      </div>
-
       <div className="subscription-details">
         {subscriptions.length > 0 ? (
-          <ul>
-            {subscriptions.map((subscription) => (
-              <li key={subscription.subscriptionId}>
-                <strong>Subscription ID:</strong> {subscription.subscriptionId} |
-                <strong> Status:</strong> {subscription.status} |
-                <strong> Price ID:</strong> {subscription.priceId} |
-                <strong> Start:</strong> {subscription.currentPeriodStart} |
-                <strong> End:</strong> {subscription.currentPeriodEnd}
-                <Button onClick={() => handleCancelSubscription(subscription.subscriptionId)}>
-                  Cancel
-                </Button>
-              </li>
-            ))}
-          </ul>
+          <table className='subscription-details--table'>
+            <thead>
+              <tr>
+                <th>Insurance Plan</th>
+                <th>Status</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {subscriptions.map((subscription) => (
+                <tr key={subscription.subscriptionId}>
+                  <td>
+                    {subscription.items.map((item, index) => (
+                      <React.Fragment key={index}>
+                        {item.result.subscriptionName}
+                        {index !== subscription.items.length - 1 && ', '}
+                      </React.Fragment>
+                    ))}
+                  </td>
+                  <td>{subscription.status}</td>
+                  <td>{subscription.currentPeriodStart}</td>
+                  <td>{subscription.currentPeriodEnd}</td>
+                  <td>
+                    <Button colorScheme='green'
+                      onClick={() =>
+                        handleCancelSubscription(subscription.subscriptionId)
+                      }
+                    >
+                      Cancel
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         ) : (
           <p>{error || 'No subscriptions found.'}</p>
         )}
       </div>
     </div>
-    
+  );
+
+  return (
+    <div className="Mainpage">
+      <HeaderMainUser />
+      <ContentMainUser setSubPage={subPage} />
+    </div>
   );
 };
-
-
 export default SubscriptionComponent;

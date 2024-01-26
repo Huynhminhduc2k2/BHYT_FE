@@ -1,46 +1,77 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
+.home--user{
+  height: 100%;
+}
+
+.subscription-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.manage-subscription-container {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 20px;
+  background-color: #f5f5f5;
+}
+.subscription-details--table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px; /* Adjust as needed */
+}
+
+.subscription-details--table td, th {
+  padding: 10px; /* Adjust as needed */
+}
+
+.subscription-details--table td {
+  white-space: nowrap;
+}
+
+.manage-subscription-details {
+  margin-top: 20px;
+}
+
+.manage-subscription-details ul {
+  list-style: none;
   padding: 0;
-  height: 100vh;
 }
 
-.container {
-  text-align: center;
+.manage-subscription-details li {
+  margin-bottom: 10px;
 }
 
-h1 {
-  color: #333;
+.manage-subscription-details strong {
+  margin-right: 5px;
 }
 
-label {
-  display: block;
-  margin: 10px 0;
-}
-
-input {
-  padding: 5px;
-  font-size: 16px;
-}
-
-button {
-  padding: 8px 16px;
-  font-size: 16px;
-  background-color: #007bff;
-  color: #fff;
+.manage-subscription-details Button {
+  background-color: #28a745;
+  color: #ffffff;
   border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.manage-subscription-details Button:hover {
+  background-color: #218838;
 }
 
-p {
-  margin: 5px 0;
+.manage-subscription-details p {
+  color: #dc3545;
 }
 
-.error {
-  color: #d9534f;
+/* Responsive styles */
+@media (max-width: 768px) {
+  .manage-subscription-container {
+    margin: 10px;
+  }
+
+  .manage-subscription-details Button {
+    font-size: 14px;
+  }
 }
