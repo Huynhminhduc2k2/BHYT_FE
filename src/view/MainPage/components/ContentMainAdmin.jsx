@@ -70,8 +70,6 @@ function ContentMainAdmin(props) {
 
   const [insuranceList, setInsuranceList] = useState([]);
 
-  const [isAddingInsurance, setIsAddingInsurance] = useState(false);
-
   useEffect(() => {
     async function getInsurances() {
       const token = localStorage.getItem('token');
@@ -107,60 +105,6 @@ function ContentMainAdmin(props) {
   const insurances = insuranceList.map((item) => (
     <DataRow key={item.insuranceID} {...item} on={toggleDetail} />
   ));
-
-  function toggleAddInsurance() {
-    setIsAddingInsurance(!isAddingInsurance);
-  }
-
-  const [formData, setFormData] = useState({
-    insuranceType: '',
-  });
-
-  function handleChangeAdd(event) {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  }
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    console.log(formData);
-    try {
-      const token = localStorage.getItem('token');
-      if (token) {
-        const options = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const res = await axios.post('/Insurance/register', formData, options);
-
-        if (!res) {
-          console.error('Empty response received');
-          return;
-        }
-
-        alert('Add successful');
-        setRefresh((prevRefresh) => !prevRefresh);
-      }
-    } catch (error) {
-      console.error('Error: ', error);
-
-      console.error('Add failed', error.res?.data);
-
-      if (
-        error.res?.status === 400 &&
-        error.res?.data?.title === 'One or more validation errors occurred.'
-      ) {
-        // Xử lý lỗi validation
-        console.error('Validation errors:', error.res.data.errors);
-      }
-
-      alert('Add failed: ' + (error.res?.data || 'Invalid insurance type'));
-    }
-  }
 
   const [upForm, setUpForm] = React.useState({
     insuranceID: '',
@@ -376,42 +320,6 @@ function ContentMainAdmin(props) {
             <button type="submit" className="btn btn-success">
               {' '}
               Search{' '}
-            </button>
-
-            {isAddingInsurance && (
-              <form
-                onSubmit={handleSubmit}
-                className="insurance--add--form gap-2"
-              >
-                <select
-                  id="insuAdd"
-                  name="insuranceType"
-                  onChange={handleChangeAdd}
-                  className="insurance--search--input"
-                  value={formData.insuranceType}
-                  defaultValue=""
-                >
-                  <option value="" selected disabled hidden>
-                    --Choose--
-                  </option>
-                  <option value="STANDARD">Standard - Price: $100</option>
-                  <option value="ADVANDCE">Advance - Price: $200</option>
-                  <option value="PREMIUM">Premium - Price: $300</option>
-                </select>
-
-                <button
-                  type="submit"
-                  className="btn btn-primary insurance--add--btn"
-                >
-                  Create
-                </button>
-              </form>
-            )}
-            <button
-              className="btn btn-secondary text-white"
-              onClick={toggleAddInsurance}
-            >
-              {isAddingInsurance ? 'Cancel' : '+ Add'}
             </button>
           </div>
         </div>
