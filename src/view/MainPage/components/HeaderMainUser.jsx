@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../API_Config';
 import { isAdmin } from '../MainPage';
 
-function HeaderMainUser() {
+function HeaderMainUser(props) {
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
@@ -43,7 +43,6 @@ function HeaderMainUser() {
 
       // Show a success message to the user
       alert('Logout successful');
-
     } catch (error) {
       console.error('Logout failed', error.response?.data);
 
@@ -97,17 +96,29 @@ function HeaderMainUser() {
           >
             <ul className="navbar-nav">
               <li className="nav-item mx-2">
-                <a className="nav-link text-white" href="#">
+                <a
+                  className="nav-link text-white"
+                  href="#"
+                  onClick={() => props.page('Home')}
+                >
                   Home
                 </a>
               </li>
               <li className="nav-item mx-2">
-                <a className="nav-link text-white" href="#">
+                <a
+                  className="nav-link text-white"
+                  href="#"
+                  onClick={() => props.page('Contact')}
+                >
                   Contact
                 </a>
               </li>
               <li className="nav-item mx-2">
-                <a className="nav-link text-white" href="#">
+                <a
+                  className="nav-link text-white"
+                  href="#"
+                  onClick={() => props.page('About')}
+                >
                   About
                 </a>
               </li>
